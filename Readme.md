@@ -1,0 +1,82 @@
+
+# USER REGISTRATION Module
+
+Angular, Microservices project using PostgreSQL and JWT authetication.
+
+## Setup
+
+Check the version of java, node & yarn.
+
+```bash
+npm i -g yarn
+$java -version
+openjdk version "11.0.13" 2021-10-19
+$node --version
+v16.13.1
+$npm --version
+8.1.2
+$yarn --version
+1.22.18
+$docker --version
+Docker version 20.10.14, build a224086
+
+```
+
+### Postgres DB
+
+```
+docker run -p 5432:5432 --name pg-container -e POSTGRES_PASSWORD=password -d postgres:9.6.10
+docker ps
+docker run -it --rm --link pg-container:postgres postgres psql -h postgres -U postgres
+CREATE USER test WITH PASSWORD 'test@123';
+CREATE DATABASE "test-db" WITH OWNER "test" ENCODING UTF8 TEMPLATE template0;
+grant all PRIVILEGES ON DATABASE "test-db" to test;
+```
+
+### Dev
+
+To Run UI in DEV mode
+
+```bash
+cd userRegistration/ui
+yarn install
+yarn build
+yarn start
+```
+
+To Run backend in DEV mode
+
+```bash
+cd userRegistration
+./gradlew bootRun
+```
+
+Open [http://localhost:4200](http://localhost:4200) to view it in the browser.
+
+```
+user: admin
+pwd: admin@123
+
+user: user
+pwd: user@123
+```
+
+### Prod
+To run as a single jar, both UI and backend are bundled to single uber jar.
+
+```bash
+./gradlew cleanBuild
+cd userRegistration/build/libs
+java -jar project88-1.0.0.jar
+```
+
+Open [http://localhost:8080](http://localhost:8080) to view it in the browser.
+
+```
+user: admin
+pwd: admin@123
+
+user: user
+pwd: user@123
+```
+
